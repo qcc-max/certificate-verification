@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blockchain Certificate Verification</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"> <!-- Links CSS -->
+</head>
+<body>
+    <div class="container">
+        <h1>QCC Certificate Verification</h1>
+        <p class="subtext">Upload a certificate PDF to verify its authenticity on the blockchain.</p>
+
+        <form action="/" method="post" enctype="multipart/form-data">
+            <label for="file-upload" class="file-upload">
+                <input type="file" id="file-upload" name="pdf_file" accept=".pdf" required>
+                📄 Choose a PDF
+            </label>
+            <button type="submit">✅ Verify Certificate</button>
+        </form>
+
+        {% if message %}
+            <div class="status {% if '✅' in message %}success{% else %}error{% endif %}">
+                {{ message }}
+            </div>
+        {% endif %}
+
+        {% if debug %}
+            <div class="debug">
+                <h3>🛠 Debug Steps:</h3>
+                {% for step in debug %}
+                    <p>🔹 {{ step }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
